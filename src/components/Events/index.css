@@ -1,0 +1,251 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Mono:wght@400;700&family=Poppins:wght@400;500;600&display=swap');
+
+/* ── Reset ───────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #060b18;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(120, 60, 200, 0.18), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 90%, rgba(80, 40, 160, 0.12), transparent);
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  color: #e2e8f0;
+}
+
+/* ── App Wrapper ─────────────────────────────────── */
+/* Fills the viewport and centers everything */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 48px 20px;
+}
+
+/* ── Two-Column Layout ───────────────────────────── */
+/* Left: emoji + image  |  Right: heading + form     */
+.set-pen-form {
+  display: flex;
+  flex-direction: column;       /* mobile: stacked */
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+  max-width: 960px;
+}
+
+@media screen and (min-width: 768px) {
+  .set-pen-form {
+    flex-direction: row;          /* desktop: side by side */
+    align-items: center;
+    justify-content: center;
+    gap: 64px;
+  }
+}
+
+/* ── Left Panel: emoji + illustration ───────────── */
+.pen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  flex-shrink: 0;
+}
+
+.pen picture img {
+  display: block;
+  filter: drop-shadow(0 0 24px rgba(167, 139, 250, 0.5));
+  animation: float 3.5s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+
+/* Hide illustration on mobile; show on desktop */
+.appointments-img {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .appointments-img {
+    display: block;
+    width: 260px;
+    max-width: 100%;
+    border-radius: 12px;
+    opacity: 0.88;
+  }
+}
+
+/* ── Right Panel: heading + form ─────────────────── */
+.set-pen-form > div:last-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 480px;
+}
+
+/* ── Heading ─────────────────────────────────────── */
+.form-fill {
+  color: #c4b5fd;
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 28px;
+  text-shadow: 0 0 30px rgba(167, 139, 250, 0.35);
+}
+
+.add {
+  color: #a78bfa;
+  margin-right: 8px;
+  text-shadow: 0 0 20px rgba(167, 139, 250, 0.6);
+}
+
+/* ── Form Card ───────────────────────────────────── */
+.form-card {
+  width: 100%;
+  background: linear-gradient(145deg, #0f1729, #131d35);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 20px;
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  box-shadow:
+    0 8px 48px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 0 32px rgba(139, 92, 246, 0.08);
+}
+
+/* ── Labels ──────────────────────────────────────── */
+.title {
+  display: block;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #a78bfa;
+  margin-top: 18px;
+  margin-bottom: 8px;
+}
+
+.form-card .title:first-of-type {
+  margin-top: 0;
+}
+
+/* ── Text / Date Inputs ──────────────────────────── */
+.Title {
+  width: 100%;
+  background-color: #0a1020;
+  color: #ddd6fe;
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+  caret-color: #a78bfa;
+}
+
+.Title::placeholder {
+  color: rgba(167, 139, 250, 0.3);
+}
+
+.Title:focus {
+  border-color: #a78bfa;
+  background-color: #0c1428;
+  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.12);
+}
+
+/* Tint the native date-picker calendar icon */
+.Title[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.7) sepia(1) saturate(3) hue-rotate(220deg);
+  cursor: pointer;
+  opacity: 0.7;
+}
+.Title[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+/* ── Textarea ─────────────────────────────────────── */
+.description {
+  width: 100%;
+  height: 120px;
+  resize: none;
+  overflow-y: auto;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  background-color: #0a1020;
+  color: #ddd6fe;
+  outline: none;
+  line-height: 1.6;
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+  caret-color: #a78bfa;
+}
+
+.description::placeholder {
+  color: rgba(167, 139, 250, 0.3);
+}
+
+.description:focus {
+  border-color: #a78bfa;
+  background-color: #0c1428;
+  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.12);
+}
+
+/* ── Submit Button ───────────────────────────────── */
+.submit-btn {
+  width: 100%;
+  margin-top: 28px;
+  background: linear-gradient(135deg, #7c3aed, #5b21b6);
+  color: #ffffff;
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 14px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 24px rgba(124, 58, 237, 0.4);
+}
+
+.submit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 36px rgba(139, 92, 246, 0.55);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 12px rgba(124, 58, 237, 0.3);
+}
+
+/* ── Appointments List <ul> ──────────────────────── */
+ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  width: 100%;
+  max-width: 960px;
+  margin-top: 40px;
+  padding: 0;
+}
